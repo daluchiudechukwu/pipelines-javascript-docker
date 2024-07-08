@@ -17,12 +17,6 @@ variables:
   imageName: 'pipelines-javascript-docker'
 
 steps:
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'JaCoCo'
-    summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/site/demo-jacoco/jacoco.xml"
-    reportDirectory: "$(System.DefaultWorkingDirectory)/**/site/demo-jacoco"
-    failIfCoverageEmpty: true
 - task: Docker@2
   displayName: Build an image
   inputs:
