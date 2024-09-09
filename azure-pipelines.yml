@@ -1,5 +1,6 @@
 trigger:
  - main
+
 strategy:
   matrix:
     linux:
@@ -13,13 +14,14 @@ strategy:
 pool:
   vmImage: $(imageName)
 
-variables:
-  imageName: $(imageName)
-
 steps:
-- task: Docker@2
-  displayName: Build an image
-  inputs:
-    repository: $(imageName)
-    command: build
-    Dockerfile: app/Dockerfile
+ - task: Maven@4
+   inputs:
+     mavenPomFile: 'pom.xml'
+     mavenOptions: '-Xmx3072m'
+     javaHomeOption: 'JDKVersion'
+     jdkVersionOption: '1.11'
+     jdkArchitectureOption: 'x64'
+     publishJUnitResults: false
+     testResultsFiles: '**/surefire-reports/TEST-*.xml'
+     goals: 'package'
