@@ -14,7 +14,7 @@ pool:
   vmImage: $(imageName)
 
 variables:
-  imageName: 'pipelines-javascript-docker'
+  imageName: $(imageName)
 
 steps:
 - task: Docker@2
